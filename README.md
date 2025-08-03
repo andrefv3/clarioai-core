@@ -64,3 +64,4 @@ Designed for modularity and maintainability, this backend supports future scalin
 ```bash
 git clone https://github.com/your-username/clarioai-backend.git
 cd clarioai-backend
+poetry install
