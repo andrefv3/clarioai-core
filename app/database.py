@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
@@ -16,6 +17,7 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
 Base = declarative_base()
 
 # Dependency to get session in FastAPI or your backend
+@asynccontextmanager
 async def get_db():
     async with AsyncSessionLocal() as session:
         yield session
