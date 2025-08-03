@@ -1,28 +1,45 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
+from enum import Enum
+from uuid import UUID
+
+class TaskStatus(str, Enum):
+    todo = 'todo'
+    in_progress = 'in_progress'
+    done = 'done'
+
+class TaskPriority(str, Enum):
+    low = 'low'
+    medium = 'medium'
+    high = 'high'
 
 class TaskBase(BaseModel):
     title: str
     description: Optional[str] = None
-    status: Optional[str] = "pending"
-    priority: Optional[str] = "medium"
+    status: TaskStatus = TaskStatus.todo
+    priority: TaskPriority = TaskPriority.medium
+    workspace_id: UUID
 
 class TaskCreate(TaskBase):
     pass
 
-class TaskUpdate(TaskBase):
-    status: Optional[str] = None
-    priority: Optional[str] = None
-    description: Optional[str] = None
-    title: Optional[str] = None
+class TaskUpdate(BaseModel):
+    title: Optional[str]
+    description: Optional[str]
+    status: Optional[TaskStatus]
+    priority: Optional[TaskPriority]
 
-class TaskInDB(TaskBase):
-    id: int
+class TaskInDBBase(TaskBase):
+    id: UUID
     created_at: datetime
-    updated_at: Optional[datetime]
-    status: str
-    priority: str
+    updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # compatible con Pydantic v2
+
+class Task(TaskInDBBase):
+    pass
+
+    class Config:
+        from_attributes = True
