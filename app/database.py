@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL_ASYNC")
 
 # Create the asynchronous engine
 engine = create_async_engine(DATABASE_URL, echo=True)

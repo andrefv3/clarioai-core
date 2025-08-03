@@ -1,9 +1,9 @@
 [project]
-name = "pyproject"
+name = "clarioai"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "andrefv3",email = "andresfelipevega567@gmail.com"}
+    {name = "andrefv3", email = "andresfelipevega567@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
@@ -12,9 +12,13 @@ dependencies = [
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "sqlalchemy (>=2.0.42,<3.0.0)",
     "uvicorn (>=0.35.0,<0.36.0)",
-    "python-dotenv (>=1.1.1,<2.0.0)"
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "asyncpg (>=0.30.0,<0.31.0)",
+    "pydantic[email] (>=2.11.7,<3.0.0)",
+    "email-validator (>=2.2.0,<3.0.0)",
+    "alembic (>=1.16.4,<2.0.0)",
+    "greenlet (>=3.2.3,<4.0.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -24,3 +28,5 @@ build-backend = "poetry.core.masonry.api"
 black = "^25.1.0"
 pytest = "^8.4.1"
 
+[tool.poetry]
+package-mode = false
